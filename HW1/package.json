@@ -22,6 +22,7 @@
   "homepage": "https://github.com/ParsaHejabi/InternetEngineering-ComputerAssignments#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "nodemon": "^1.19.4",
     "whiskers": "^0.4.0"
   }
 }
