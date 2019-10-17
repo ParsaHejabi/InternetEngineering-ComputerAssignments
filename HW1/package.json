@@ -4,7 +4,7 @@
   "description": "First homework for Internet Engineering course at Shahid Beheshti University on Fall 2019",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/ParsaHejabi/InternetEngineering-ComputerAssignments/issues"
   },
-  "homepage": "https://github.com/ParsaHejabi/InternetEngineering-ComputerAssignments#readme"
+  "homepage": "https://github.com/ParsaHejabi/InternetEngineering-ComputerAssignments#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "whiskers": "^0.4.0"
+  }
 }
