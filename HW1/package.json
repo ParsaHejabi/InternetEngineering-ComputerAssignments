@@ -1,15 +1,23 @@
 {
-  "name": "web01",
+  "name": "hw1",
   "version": "1.0.0",
-  "description": "",
+  "description": "First homework for Internet Engineering course at Shahid Beheshti University on Fall 2019",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ParsaHejabi/InternetEngineering-ComputerAssignments.git"
+  },
+  "keywords": [
+    "node.js",
+    "express"
+  ],
+  "author": "Parsa Hejabi",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1",
-    "whiskers": "^0.4.0"
-  }
+  "bugs": {
+    "url": "https://github.com/ParsaHejabi/InternetEngineering-ComputerAssignments/issues"
+  },
+  "homepage": "https://github.com/ParsaHejabi/InternetEngineering-ComputerAssignments#readme"
 }
