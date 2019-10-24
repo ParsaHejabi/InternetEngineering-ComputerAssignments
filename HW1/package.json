@@ -22,13 +22,13 @@
   "homepage": "https://github.com/ParsaHejabi/InternetEngineering-ComputerAssignments#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "nodemon": "^1.19.4",
     "whiskers": "^0.4.0"
   },
   "devDependencies": {
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "nodemon": "^1.19.4"
   }
 }
