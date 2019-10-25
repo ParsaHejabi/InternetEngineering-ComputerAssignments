@@ -1,0 +1,9 @@
+config:
+  target: "https://node-gis-functionality.herokuapp.com"
+  phases:
+    - duration: 60
+      arrivalRate: 60
+scenarios:
+  - flow:
+      - get:
+          url: "/"
