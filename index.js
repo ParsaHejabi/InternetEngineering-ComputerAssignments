@@ -22,6 +22,16 @@ app.use('/', (req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+  res.send(whiskers.render(`
+  <html>
+  <body>
+  <h1> Solution for HW1! </h1>
+  </body>
+  </html>
+  `));
+});
+
 app.get('/gis/testpoint', (req, res) => {
   const result = {};
   try {
