@@ -6,7 +6,7 @@ const fs = require('fs');
 const helper = require('./helper');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 /* eslint no-console: ["error", { allow: ["log"] }] */
 console.log('Starting application...');
@@ -85,4 +85,4 @@ app.post('/gis/addpolygon', express.json(), (req, res) => {
   `));
 });
 
-app.listen(process.env.port || port, () => console.log(`Application is listening on port ${port}!`));
+app.listen(port, () => console.log(`Application is listening on port ${port}!`));
