@@ -1,51 +1,78 @@
 const express = require('express');
+const assert = require('assert');
 const whiskers = require('whiskers');
+const turf = require('@turf/turf');
+const fs = require('fs');
+const helper = require('./helper');
 
 const app = express();
 const port = 3000;
 
 /* eslint no-console: ["error", { allow: ["log"] }] */
-console.log('--------------------------- NEW APP ');
+console.log('Starting application...');
 app.use('/', (req, res, next) => {
-  console.log('Middleware Called!');
+  helper.logger.info({
+    message: 'Request: ',
+    url: req.url,
+    method: req.method,
+    ip: req.ip,
+    query: req.query,
+  });
 
   next();
 });
 
 app.get('/gis/testpoint', (req, res) => {
-  console.log(req.query.lat);
-  console.log(req.query.long);
-
-
-  res.send(whiskers.render(`
+  const result = {};
+  try {
+    assert.notStrictEqual(req.query.lat, undefined, 'No lat is given!');
+    assert.notStrictEqual(req.query.long, undefined, 'No long is given!');
+    helper.dataJsonFile.features.forEach((item) => {
+      if (turf.booleanPointInPolygon(turf.point([req.query.lat, req.query.long]), item)) {
+        if (result[item.geometry.type] === undefined) {
+          result[item.geometry.type] = [];
+        }
+        result[item.geometry.type].push(item.properties.name);
+      }
+    });
+    res.send(result);
+  } catch (err) {
+    assert(err instanceof assert.AssertionError);
+    helper.logger.error({
+      message: err.message,
+      url: req.url,
+      query: req.query,
+    });
+    res.send(whiskers.render(`
     <html>
     <body>
-    <h1>Hello team a new rendering engine is out!</h1>
-    <ul>
-    <li>Foo is:{query.foo}</li>
-    <li>Bar is:{query.bar}</li>
-    <ul>
+    <h1>ERROR!</h1>
+    ${err.message}
     </body>
     </html>
     `, req));
+  }
 });
 
-app.post('/gis/addpolygon', (req, res) => {
-  console.log(req.query.lat);
-  console.log(req.query.long);
-
-
+app.post('/gis/addpolygon', express.json(), (req, res) => {
+  helper.dataJsonFile.features.push(req.body);
+  fs.writeFile('./data.json', JSON.stringify(helper.dataJsonFile), (err) => {
+    if (err) {
+      helper.logger.error({
+        message: err.message,
+        url: req.url,
+        query: req.query,
+        body: req.body,
+      });
+    }
+  });
   res.send(whiskers.render(`
-    <html>
-    <body>
-    <h1>Hello team a new rendering engine is out!</h1>
-    <ul>
-    <li>Foo is:{query.foo}</li>
-    <li>Bar is:{query.bar}</li>
-    <ul>
-    </body>
-    </html>
-    `, req));
+  <html>
+  <body>
+  <h1>Success!</h1>
+  </body>
+  </html>
+  `));
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Application is listening on port ${port}!`));

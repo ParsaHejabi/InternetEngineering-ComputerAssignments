@@ -4,7 +4,7 @@
   "description": "First homework for Internet Engineering course at Shahid Beheshti University on Fall 2019",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -21,13 +21,16 @@
   },
   "homepage": "https://github.com/ParsaHejabi/InternetEngineering-ComputerAssignments#readme",
   "dependencies": {
+    "@turf/boolean-point-in-polygon": "^6.0.1",
+    "@turf/polygonize": "^5.1.5",
+    "@turf/turf": "^5.1.6",
     "express": "^4.17.1",
-    "whiskers": "^0.4.0"
+    "whiskers": "^0.4.0",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "eslint": "^6.5.1",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.18.2",
     "nodemon": "^1.19.4"
   }
