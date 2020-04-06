@@ -8,7 +8,6 @@ const helper = require('./helper');
 const app = express();
 const port = process.env.PORT || 3000;
 
-/* eslint no-console: ["error", { allow: ["log"] }] */
 console.log('Starting application...');
 app.use('/', (req, res, next) => {
   helper.logger.info({
@@ -23,13 +22,15 @@ app.use('/', (req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.send(whiskers.render(`
+  res.send(
+    whiskers.render(`
   <html>
   <body>
   <h1> Solution for HW1! </h1>
   </body>
   </html>
-  `));
+  `)
+  );
 });
 
 app.get('/gis/testpoint', (req, res) => {
@@ -38,7 +39,12 @@ app.get('/gis/testpoint', (req, res) => {
     assert.notStrictEqual(req.query.lat, undefined, 'No lat is given!');
     assert.notStrictEqual(req.query.long, undefined, 'No long is given!');
     helper.dataJsonFile.features.forEach((item) => {
-      if (turf.booleanPointInPolygon(turf.point([req.query.lat, req.query.long]), item)) {
+      if (
+        turf.booleanPointInPolygon(
+          turf.point([req.query.lat, req.query.long]),
+          item
+        )
+      ) {
         if (result[item.geometry.type] === undefined) {
           result[item.geometry.type] = [];
         }
@@ -53,14 +59,20 @@ app.get('/gis/testpoint', (req, res) => {
       url: req.url,
       query: req.query,
     });
-    res.send(whiskers.render(`
+    res.status(400);
+    res.send(
+      whiskers.render(
+        `
     <html>
     <body>
     <h1>ERROR!</h1>
     ${err.message}
     </body>
     </html>
-    `, req));
+    `,
+        req
+      )
+    );
   }
 });
 
@@ -76,13 +88,17 @@ app.post('/gis/addpolygon', express.json(), (req, res) => {
       });
     }
   });
-  res.send(whiskers.render(`
+  res.send(
+    whiskers.render(`
   <html>
   <body>
   <h1>Success!</h1>
   </body>
   </html>
-  `));
+  `)
+  );
 });
 
-app.listen(port, () => console.log(`Application is listening on port ${port}!`));
+app.listen(port, () =>
+  console.log(`Application is listening on port ${port}!`)
+);
