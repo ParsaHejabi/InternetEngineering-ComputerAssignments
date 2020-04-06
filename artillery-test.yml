@@ -6,4 +6,4 @@ config:
 scenarios:
   - flow:
       - get:
-          url: "/"
+          url: "/testpoint?lat=52.516021728515625&long=29.64927193684025"
