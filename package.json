@@ -24,7 +24,7 @@
     "@turf/boolean-point-in-polygon": "^6.0.1",
     "@turf/polygonize": "^5.1.5",
     "@turf/turf": "^5.1.6",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "whiskers": "^0.4.0",
     "winston": "^3.2.1"
   },
